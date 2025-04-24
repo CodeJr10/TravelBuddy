@@ -1,26 +1,16 @@
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-const userModel = new mongoose.Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
+dotenv.config();
+const connectDb = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('"MongoDB connected successfully");');
+  } catch (error) {
+    console.error("MongoDB connection error:", error.message);
+    process.exit(1);
+    // Exit the process with failure
   }
-);
+};
 
-const User = mongoose.model("User", userModel);
-
-export default User;
+export default connectDb;

@@ -44,4 +44,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { registerUser };
+const loginUser = (async) => (req, res) => {};
+
+export { registerUser, loginUser };

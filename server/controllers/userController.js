@@ -44,6 +44,49 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser = (async) => (req, res) => {};
+const loginUser = async (req, res) => {
+  // fetch the email and password from the request body
+  const { email, password } = req.body;
+
+  // check if the email and password are provided
+  // if not, return a 400 status code with an error message
+  if (!email || !password) {
+    return res.status(400).json({ message: "Please fill all the fields" });
+  }
+
+  // find the user in the database using the email
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(400).json({ message: "User not found" });
+  }
+
+  const isMatched = await bcrypt.compare(password, User.password);
+
+  if (!isMatched) {
+    // if the password is incorrect, return a 400 status code with an error message
+    return res.status(400).json({ message: "Invalid credentials" });
+  }
+
+  if (isMatched) {
+    // if the password is correct, create a JWT token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      token,
+    });
+  } else {
+    res.status(400).json({ message: "Invalid credentials" });
+  }
+
+  try {
+  } catch (error) {
+    console.error("Error logging in user:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 export { registerUser, loginUser };

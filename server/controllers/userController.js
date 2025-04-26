@@ -87,4 +87,16 @@ const loginUser = async (req, res) => {
   }
 };
 
+const logoutUser = async (req, res) => {
+  try {
+    // Clear the JWT token from the client-side (e.g., local storage or cookies)
+    // This is typically done on the client side, but you can also handle it here if needed
+
+    res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    console.error("Error logging out user:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 export { registerUser, loginUser };

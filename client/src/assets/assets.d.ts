@@ -6,6 +6,7 @@ declare module "../assets/assets.js" {
     signuphero: string;
     logo: string;
     loginhero: string;
+    heroimg: string;
     // logo: string;
     // googleIcon: string;
     // appleIcon: string;

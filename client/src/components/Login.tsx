@@ -6,6 +6,8 @@ import { assets } from "../assets/assets.js";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {};
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-[#e0eafc] to-[#cfdef3] ">
       <div className="flex w-[90%] max-w-5xl h-[500px] bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-gray-300">
@@ -50,7 +52,10 @@ const Login = () => {
                 className="w-full outline-none"
               />
             </div>
-            <button className="w-full bg-blue-500 text-sm border-0 text-white py-2 rounded-md mb-4 hover:bg-blue-600 transition duration-200 ease-in-out">
+            <button
+              className="w-full bg-blue-500 text-sm border-0 text-white py-2 rounded-md mb-4 hover:bg-blue-600 transition duration-200 ease-in-out"
+              onClick={handleLogin}
+            >
               Sign in
             </button>
           </form>
